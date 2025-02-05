@@ -22,9 +22,9 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        pnlBack.setBackground(new java.awt.Color(0, 0, 0));
+        pnlBack.setBackground(new java.awt.Color(0, 51, 0));
 
-        pnlPrincipal.setBackground(new java.awt.Color(51, 51, 51));
+        pnlPrincipal.setBackground(new java.awt.Color(0, 102, 51));
         pnlPrincipal.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         btnEnt0.setBackground(new java.awt.Color(102, 102, 102));
@@ -61,9 +61,8 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap(138, Short.MAX_VALUE)
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(lblEnt2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(lblEnt1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblEnt0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(lblEnt1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblEnt0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnEnt0, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -121,7 +120,8 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEnt0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnt0ActionPerformed
-        // TODO add your handling code here:
+        CRUD telacrud = new CRUD();
+        telacrud.setVisible(true);
     }//GEN-LAST:event_btnEnt0ActionPerformed
 
     

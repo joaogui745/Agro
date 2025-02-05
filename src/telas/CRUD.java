@@ -39,9 +39,9 @@ public class CRUD extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        pnlBlack.setBackground(new java.awt.Color(0, 0, 0));
+        pnlBlack.setBackground(new java.awt.Color(0, 51, 0));
 
-        pnlBack.setBackground(new java.awt.Color(51, 51, 51));
+        pnlBack.setBackground(new java.awt.Color(0, 102, 51));
         pnlBack.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lblEnt.setText("ENTIDADE:");
@@ -53,6 +53,8 @@ public class CRUD extends javax.swing.JFrame {
         });
 
         btnEnt.setText("OK");
+
+        pnlData.setBackground(new java.awt.Color(0, 153, 102));
 
         javax.swing.GroupLayout pnlDataLayout = new javax.swing.GroupLayout(pnlData);
         pnlData.setLayout(pnlDataLayout);
@@ -91,12 +93,12 @@ public class CRUD extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addGroup(pnlBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlBackLayout.createSequentialGroup()
-                        .addGap(141, 141, 141)
+                        .addGap(115, 115, 115)
                         .addComponent(lblEnt)
                         .addGap(18, 18, 18)
-                        .addComponent(txtEnt, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnEnt, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtEnt, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEnt))
                     .addGroup(pnlBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(pnlData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(pnlBackLayout.createSequentialGroup()
