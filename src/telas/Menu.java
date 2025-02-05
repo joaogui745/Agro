@@ -25,11 +25,12 @@ public class Menu extends javax.swing.JFrame {
         pnlBack.setBackground(new java.awt.Color(0, 51, 0));
 
         pnlPrincipal.setBackground(new java.awt.Color(0, 102, 51));
-        pnlPrincipal.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pnlPrincipal.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnEnt0.setBackground(new java.awt.Color(102, 102, 102));
         btnEnt0.setForeground(new java.awt.Color(255, 255, 255));
         btnEnt0.setText("ENT");
+        btnEnt0.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnEnt0.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEnt0ActionPerformed(evt);
@@ -39,10 +40,12 @@ public class Menu extends javax.swing.JFrame {
         btnEnt1.setBackground(new java.awt.Color(102, 102, 102));
         btnEnt1.setForeground(new java.awt.Color(255, 255, 255));
         btnEnt1.setText("ENT");
+        btnEnt1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnEnt2.setBackground(new java.awt.Color(102, 102, 102));
         btnEnt2.setForeground(new java.awt.Color(255, 255, 255));
         btnEnt2.setText("ENT");
+        btnEnt2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lblEnt0.setForeground(new java.awt.Color(255, 255, 255));
         lblEnt0.setText("Entidade 0");
@@ -57,18 +60,18 @@ public class Menu extends javax.swing.JFrame {
         pnlPrincipal.setLayout(pnlPrincipalLayout);
         pnlPrincipalLayout.setHorizontalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
-                .addContainerGap(138, Short.MAX_VALUE)
+            .addGroup(pnlPrincipalLayout.createSequentialGroup()
+                .addGap(139, 139, 139)
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(lblEnt2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblEnt1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblEnt0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEnt0, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnEnt1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnEnt2, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(97, 97, 97))
+                    .addComponent(lblEnt0))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnEnt2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEnt1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEnt0, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(120, 120, 120))
         );
         pnlPrincipalLayout.setVerticalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,7 +88,7 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEnt2)
                     .addComponent(lblEnt2))
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlBackLayout = new javax.swing.GroupLayout(pnlBack);

@@ -46,13 +46,18 @@ public class CRUD extends javax.swing.JFrame {
 
         lblEnt.setText("ENTIDADE:");
 
+        txtEnt.setBackground(new java.awt.Color(51, 51, 51));
+        txtEnt.setForeground(new java.awt.Color(255, 255, 255));
         txtEnt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEntActionPerformed(evt);
             }
         });
 
+        btnEnt.setBackground(new java.awt.Color(51, 51, 51));
+        btnEnt.setForeground(java.awt.SystemColor.control);
         btnEnt.setText("OK");
+        btnEnt.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         pnlData.setBackground(new java.awt.Color(0, 153, 102));
 
@@ -67,23 +72,35 @@ public class CRUD extends javax.swing.JFrame {
             .addGap(0, 284, Short.MAX_VALUE)
         );
 
+        jButton1.setBackground(new java.awt.Color(51, 51, 51));
+        jButton1.setForeground(java.awt.SystemColor.control);
         jButton1.setText("CRIAR");
+        jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(51, 51, 51));
+        jButton2.setForeground(java.awt.SystemColor.control);
         jButton2.setText("EDITAR");
+        jButton2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jButton3.setBackground(new java.awt.Color(51, 51, 51));
+        jButton3.setForeground(java.awt.SystemColor.control);
         jButton3.setText("EXCLUIR");
+        jButton3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
 
+        jButton5.setBackground(new java.awt.Color(51, 51, 51));
+        jButton5.setForeground(java.awt.SystemColor.control);
         jButton5.setText("SALVAR");
+        jButton5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout pnlBackLayout = new javax.swing.GroupLayout(pnlBack);
         pnlBack.setLayout(pnlBackLayout);
@@ -98,17 +115,17 @@ public class CRUD extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(txtEnt, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnEnt))
+                        .addComponent(btnEnt, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(pnlData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(pnlBackLayout.createSequentialGroup()
-                            .addComponent(jButton1)
-                            .addGap(69, 69, 69)
-                            .addComponent(jButton2)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(73, 73, 73)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton5)
-                            .addGap(75, 75, 75)
-                            .addComponent(jButton3))))
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(63, 63, 63)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         pnlBackLayout.setVerticalGroup(
@@ -127,7 +144,7 @@ public class CRUD extends javax.swing.JFrame {
                     .addComponent(jButton2)
                     .addComponent(jButton3)
                     .addComponent(jButton5))
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlBlackLayout = new javax.swing.GroupLayout(pnlBlack);
