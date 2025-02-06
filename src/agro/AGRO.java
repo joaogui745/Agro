@@ -1,13 +1,13 @@
 
 package agro;
 
+import bancodedados.BancoDeDados;
 import telas.Menu;
 
 public class AGRO {
 
     public static void main(String[] args) {
-        Menu menu =  new Menu();
-        menu.setVisible(true);
+        BancoDeDados banco = BancoDeDados.getInstance();
     }
     
 }
