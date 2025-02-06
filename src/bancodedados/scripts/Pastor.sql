@@ -1,5 +1,6 @@
-/* 
-    Coloque aqui sua tabela sql
- */
-
+CREATE TABLE IF NOT EXISTS pastor(
+    idPastor INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome TEXT NOT NULL,
+    salario REAL NOT NULL
+);
 
