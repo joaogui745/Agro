@@ -10,3 +10,4 @@ CREATE TABLE IF NOT EXISTS localidade(
     FOREIGN KEY (idPastor) REFERENCES pastor(idPastor)
         ON DELETE CASCADE
 );
+

@@ -3,3 +3,4 @@ CREATE TABLE IF NOT EXISTS pastor(
     nome TEXT NOT NULL,
     salario REAL NOT NULL
 );
+
