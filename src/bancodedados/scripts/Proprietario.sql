@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXIST proprietario(
+CREATE TABLE IF NOT EXISTs proprietario(
     email PRIMARY KEY NOT NULL,
     cpf TEXT UNIQUE NOT NULL,
     senha TEXT NOT NULL,
