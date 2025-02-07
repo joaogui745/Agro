@@ -11,10 +11,11 @@ public class BancoDeDados {
     private Connection connection = null;
     private BancoDeDados() {
         try {
-            connection = DriverManager.getConnection("jdbc:sqlite:data.db");
+            connection = DriverManager.getConnection("jdbc:sqlite::memory:");
             try (Statement comando = connection.createStatement()) {
                 comando.setQueryTimeout(30);
-                comando.addBatch(LeitorDeArquivos.carregaArquivo("path"));
+                comando.addBatch(LeitorDeArquivos.carregaArquivo("bancodedados/scripts/Proprietario.sql"));
+                comando.executeBatch();
             }
         } catch (SQLException | IOException ex ) {
             System.out.println(ex);
