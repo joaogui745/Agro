@@ -1,7 +1,8 @@
 package modelos;
 
 public class Proprietario {
-    String cpf, email, senha, nome, telefone;
+    private static Proprietario proprietarioSessao;
+    private String cpf, email, senha, nome, telefone;
 
     public Proprietario(String cpf, String email, String senha, String nome, String telefone) {
         this.cpf = cpf;
@@ -10,6 +11,16 @@ public class Proprietario {
         this.nome = nome;
         this.telefone = telefone;
     }
+
+    public static Proprietario getProprietarioSessao() {
+        return proprietarioSessao;
+    }
+
+    public static void setProprietarioSessao(Proprietario proprietarioSessao) {
+        Proprietario.proprietarioSessao = proprietarioSessao;
+    }
+    
+    
 
     public String getCpf() {
         return cpf;

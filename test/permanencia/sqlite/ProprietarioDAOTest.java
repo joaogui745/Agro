@@ -17,7 +17,8 @@ public class ProprietarioDAOTest {
     @Test
     public void testCriarBuscar() {
         Proprietario proprietario = new Proprietario("987.654.321-09", "maria.silva@unb.br", "senha123", "Maria Silva", "9999-8888");
-        String email = conexao.criar(proprietario);
+        boolean resposta = conexao.criar(proprietario);
+        assertTrue(resposta);
         Proprietario mesmoProprietario = conexao.buscarPorEmail(proprietario.getEmail());
         assertEquals(proprietario.toString(), mesmoProprietario.toString());
         Proprietario outroProprietario = conexao.buscarPorEmail("null@unb.com"); // Email Inexistente
@@ -45,6 +46,7 @@ public class ProprietarioDAOTest {
         proprietario.setNome("Ana Souza Alves");
         proprietario.setTelefone("5555-4444");
         resposta = conexao.atualizar(proprietario, proprietario.getEmail());
+        assertTrue(resposta);
         Proprietario proprietarioAtualizado = conexao.buscarPorEmail(proprietario.getEmail());
         assertEquals( proprietario.toString(), proprietarioAtualizado.toString());
         
@@ -58,6 +60,7 @@ public class ProprietarioDAOTest {
         String emailAntigo = proprietario.getEmail();
         proprietario.setEmail("pedrao@unb.br");
         resposta = conexao.atualizar(proprietario, emailAntigo);
+        assertTrue(resposta);
         proprietarioAtualizado = conexao.buscarPorEmail(proprietario.getEmail());
         assertEquals(proprietarioAtualizado.toString(), proprietario.toString());
     }

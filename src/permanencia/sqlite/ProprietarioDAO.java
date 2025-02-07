@@ -38,23 +38,21 @@ public class ProprietarioDAO implements ProprietarioDAOI{
     }
 
     @Override
-    public String criar(Proprietario proprietario){
-        String resultado = "";
+    public boolean criar(Proprietario proprietario){
+        boolean resultado = true;
         try (PreparedStatement comando = conexao.prepareStatement(
-                "INSERT INTO proprietario(email, cpf, senha, nome, telefone) VALUES(?, ?, ?, ?, ?)"
-                        + "RETURNING email;")) {
+                "INSERT INTO proprietario(email, cpf, senha, nome, telefone) VALUES(?, ?, ?, ?, ?);")) {
             comando.setString(1, proprietario.getEmail());
             comando.setString(2, proprietario.getCpf());
             comando.setString(3, proprietario.getSenha());
             comando.setString(4, proprietario.getNome());
             comando.setString(5, proprietario.getTelefone());
             
-            ResultSet id = comando.executeQuery();
-            resultado = id.getString("email");
+            comando.executeUpdate();
             
         } catch (SQLException ex) {
             if(SQLiteErrorCode.SQLITE_CONSTRAINT.code == ex.getErrorCode()){
-                return resultado;
+                return false;
             }
             Logger.getLogger(ProprietarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
