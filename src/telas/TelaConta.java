@@ -7,11 +7,11 @@ import modelos.Proprietario;
 import permanencia.sqlite.ProprietarioDAO;
 
 
-public class Conta extends javax.swing.JFrame {
+public class TelaConta extends javax.swing.JFrame {
     boolean criar;
-    Principal pai;
+    TelaPrincipal pai;
 
-    public Conta(boolean criar, Principal pai) {
+    public TelaConta(boolean criar, TelaPrincipal pai) {
         initComponents();
         this.criar = criar;
         this.pai = pai;
@@ -66,6 +66,7 @@ public class Conta extends javax.swing.JFrame {
         txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtEmail.setForeground(new java.awt.Color(255, 255, 255));
         txtEmail.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtEmail.setCaretColor(new java.awt.Color(255, 255, 255));
 
         lblSenha.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         lblSenha.setForeground(new java.awt.Color(255, 255, 255));
@@ -75,6 +76,7 @@ public class Conta extends javax.swing.JFrame {
         txtSenha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtSenha.setForeground(new java.awt.Color(255, 255, 255));
         txtSenha.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtSenha.setCaretColor(new java.awt.Color(255, 255, 255));
 
         lblNome.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         lblNome.setForeground(new java.awt.Color(232, 232, 232));
@@ -84,6 +86,7 @@ public class Conta extends javax.swing.JFrame {
         txtNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtNome.setForeground(new java.awt.Color(255, 255, 255));
         txtNome.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtNome.setCaretColor(new java.awt.Color(255, 255, 255));
 
         lblCPF.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         lblCPF.setForeground(new java.awt.Color(232, 232, 232));
@@ -93,6 +96,7 @@ public class Conta extends javax.swing.JFrame {
         txtCPF.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtCPF.setForeground(new java.awt.Color(255, 255, 255));
         txtCPF.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtCPF.setCaretColor(new java.awt.Color(255, 255, 255));
 
         lblTelefone.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         lblTelefone.setForeground(new java.awt.Color(232, 232, 232));
@@ -102,6 +106,7 @@ public class Conta extends javax.swing.JFrame {
         txtTelefone.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtTelefone.setForeground(new java.awt.Color(255, 255, 255));
         txtTelefone.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtTelefone.setCaretColor(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout pnlDataLayout = new javax.swing.GroupLayout(pnlData);
         pnlData.setLayout(pnlDataLayout);

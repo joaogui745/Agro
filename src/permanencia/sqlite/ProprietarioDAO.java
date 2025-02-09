@@ -4,13 +4,15 @@ import bancodedados.BancoDeDados;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import modelos.Fazenda;
 import modelos.Proprietario;
 import org.sqlite.SQLiteErrorCode;
 import permanencia.interfaces.ProprietarioDAOI;
 public class ProprietarioDAO implements ProprietarioDAOI{
-    Connection conexao;
+    private final Connection conexao;
     public ProprietarioDAO() {
         conexao = BancoDeDados.getInstance().getConnection();
     }
@@ -97,6 +99,32 @@ public class ProprietarioDAO implements ProprietarioDAOI{
             Logger.getLogger(ProprietarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return resultado == 1;
+    }
+
+    @Override
+    public ArrayList<Fazenda> buscarFazendas(String emailProprietario) {
+        int idFazenda;
+        double areaTotal;
+        String estado, nome, email;
+        ArrayList<Fazenda> lista = new ArrayList<>();
+        
+        try (PreparedStatement comando = conexao.prepareStatement(
+                "SELECT * FROM fazenda WHERE email = ?")) {
+        comando.setString(1, emailProprietario);
+        ResultSet res  = comando.executeQuery();
+        while (res.next()){
+            idFazenda = res.getInt("idFazenda");
+            areaTotal = res.getDouble("areaTotal");
+            estado = res.getString("estado");
+            nome = res.getString("nome");
+            email = res.getString("nome");
+            lista.add(new Fazenda(idFazenda, areaTotal, estado, nome, email));
+        }
+        }
+        catch (SQLException ex) {
+            System.out.println(ex);
+        } 
+        return lista;
     }
     
 }

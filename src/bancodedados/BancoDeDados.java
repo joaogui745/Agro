@@ -15,9 +15,18 @@ public class BancoDeDados {
             try (Statement comando = connection.createStatement()) {
                 comando.setQueryTimeout(30);
                 comando.addBatch(LeitorDeArquivos.carregaArquivo("bancodedados/scripts/Proprietario.sql"));
+                comando.addBatch(LeitorDeArquivos.carregaArquivo("bancodedados/scripts/Fazenda.sql"));
                 comando.addBatch("""
                                  INSERT INTO proprietario(email, cpf, senha, nome, telefone) 
                                  VALUES('joao@unb.br', '777.777.777-77', 'senha', 'João Botão', '4002-8922');
+                                 """);
+                comando.addBatch("""
+                                 INSERT INTO fazenda (areaTotal, estado, nome, email) VALUES
+                                 (100.0, 'Goiás', 'Fazenda Boi Branco', 'joao@unb.br'),
+                                 (500.0, 'Minas Gerais', 'Fazenda Serra da Mantiqueira', 'joao@unb.br'),
+                                 (200.0, 'Mato Grosso', 'Fazenda Chapadão', 'joao@unb.br'),
+                                 (300.0, 'São Paulo', 'Fazenda Jatobá', 'joao@unb.br'),
+                                 (400.0, 'Rio de Janeiro', 'Fazenda Vista Alegre', 'joao@unb.br');
                                  """);
                 comando.executeBatch();
             }

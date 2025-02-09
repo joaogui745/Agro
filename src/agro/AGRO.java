@@ -1,17 +1,11 @@
-
 package agro;
 
-import bancodedados.BancoDeDados;
-import java.sql.SQLException;
-import modelos.Proprietario;
-import org.sqlite.SQLiteErrorCode;
-import permanencia.sqlite.ProprietarioDAO;
-import telas.Principal;
+import telas.TelaPrincipal;
 
 public class AGRO {
 
     public static void main(String[] args) {
-        Principal telaMenu = new Principal();
+        TelaPrincipal telaMenu = new TelaPrincipal();
         telaMenu.setVisible(true);
     }
     

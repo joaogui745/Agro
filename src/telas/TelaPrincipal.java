@@ -4,9 +4,9 @@ import javax.swing.JOptionPane;
 import modelos.Proprietario;
 import permanencia.sqlite.ProprietarioDAO;
 
-public class Principal extends javax.swing.JFrame {
+public class TelaPrincipal extends javax.swing.JFrame {
 
-    public Principal() {
+    public TelaPrincipal() {
         initComponents();
         this.setLocationRelativeTo(null);
         mostraLogin();
@@ -128,6 +128,7 @@ public class Principal extends javax.swing.JFrame {
         txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtEmail.setForeground(new java.awt.Color(255, 255, 255));
         txtEmail.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtEmail.setCaretColor(new java.awt.Color(255, 255, 255));
         txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmailActionPerformed(evt);
@@ -138,6 +139,7 @@ public class Principal extends javax.swing.JFrame {
         txtSenha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtSenha.setForeground(new java.awt.Color(255, 255, 255));
         txtSenha.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtSenha.setCaretColor(new java.awt.Color(255, 255, 255));
         txtSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSenhaActionPerformed(evt);
@@ -168,24 +170,24 @@ public class Principal extends javax.swing.JFrame {
         pnlPrincipalLayout.setHorizontalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                .addGap(91, 91, 91)
-                .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblSenha)
-                    .addComponent(lblEmail))
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblCriaConta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
-                                .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18))))
-                    .addGroup(pnlPrincipalLayout.createSequentialGroup()
+                        .addGap(91, 91, 91)
+                        .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblSenha)
+                            .addComponent(lblEmail))
                         .addGap(14, 14, 14)
                         .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                            .addComponent(txtEmail))))
-                .addContainerGap(134, Short.MAX_VALUE))
+                            .addComponent(txtEmail)))
+                    .addGroup(pnlPrincipalLayout.createSequentialGroup()
+                        .addGap(191, 191, 191)
+                        .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
+                .addGap(0, 181, Short.MAX_VALUE)
+                .addComponent(lblCriaConta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(174, 174, 174))
         );
         pnlPrincipalLayout.setVerticalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,12 +273,13 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnOKActionPerformed
 
     private void lblCriaContaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCriaContaMouseClicked
-        Conta telaCadastro =  new Conta(true, this);
+        TelaConta telaCadastro =  new TelaConta(true, this);
         telaCadastro.setVisible(true);
     }//GEN-LAST:event_lblCriaContaMouseClicked
 
     private void btnFazendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFazendaActionPerformed
-        // TODO add your handling code here:
+        TelaFazenda telaFazenda = new TelaFazenda();
+        telaFazenda.setVisible(true);
     }//GEN-LAST:event_btnFazendaActionPerformed
 
     private void pnlMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_pnlMenuComponentShown
@@ -284,7 +287,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_pnlMenuComponentShown
 
     private void btlContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btlContaActionPerformed
-    Conta telaConta =  new Conta(false, this);
+    TelaConta telaConta =  new TelaConta(false, this);
     telaConta.setVisible(true);
     }//GEN-LAST:event_btlContaActionPerformed
 
