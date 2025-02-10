@@ -51,6 +51,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnLocal.setForeground(new java.awt.Color(255, 255, 255));
         btnLocal.setText("Locais");
         btnLocal.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnLocal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLocalActionPerformed(evt);
+            }
+        });
 
         btnFazenda.setBackground(new java.awt.Color(51, 51, 51));
         btnFazenda.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -290,6 +295,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     TelaConta telaConta =  new TelaConta(false, this);
     telaConta.setVisible(true);
     }//GEN-LAST:event_btlContaActionPerformed
+
+    private void btnLocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocalActionPerformed
+        TelaLocal telaLocal = new TelaLocal();
+        telaLocal.setVisible(true);
+    }//GEN-LAST:event_btnLocalActionPerformed
 
     public void mostraLogin(){
         pnlPrincipal.setVisible(true);

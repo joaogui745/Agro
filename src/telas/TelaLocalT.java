@@ -13,10 +13,10 @@ import modelos.Proprietario;
 import permanencia.sqlite.FazendaDAO;
 
 
-public class TelaFazenda extends javax.swing.JFrame {
+public class TelaLocalT extends javax.swing.JFrame {
     ArrayList<Fazenda> fazendas;
     boolean criar;
-    public TelaFazenda() {
+    public TelaLocalT() {
         initComponents();
         this.setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -91,11 +91,11 @@ public class TelaFazenda extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "NOME", "ESTADO", "AREA"
+                "NOME", "IDFAZENDA", "ESTADO", "AREA"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
@@ -438,6 +438,7 @@ public class TelaFazenda extends javax.swing.JFrame {
         
         tblFazendas.setModel(modelo);
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBusca;

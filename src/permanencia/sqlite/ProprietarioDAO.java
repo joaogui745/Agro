@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelos.Fazenda;
+import modelos.Imagem;
+import modelos.Local;
+import modelos.Pastor;
 import modelos.Proprietario;
 import org.sqlite.SQLiteErrorCode;
 import permanencia.interfaces.ProprietarioDAOI;
@@ -120,11 +123,68 @@ public class ProprietarioDAO implements ProprietarioDAOI{
             email = res.getString("nome");
             lista.add(new Fazenda(idFazenda, areaTotal, estado, nome, email));
         }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProprietarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        catch (SQLException ex) {
-            System.out.println(ex);
-        } 
+         
         return lista;
     }
+
+    @Override
+    public ArrayList<Local> buscarLocais(String emailProprietario) {
+        ArrayList<Local> locais = new ArrayList<>();
+        String nome, nisPastor;
+        int idFazenda;
+        double area;
+        byte[] foto;
+        try (PreparedStatement comando = conexao.prepareStatement(
+                """
+                SELECT *
+                FROM LocalidadesPorProprietario
+                WHERE email = ?;
+                """)) {
+        comando.setString(1, emailProprietario);
+        ResultSet res  = comando.executeQuery();
+        while (res.next()){
+            nome = res.getString("nome");
+            nisPastor = res.getString("nisPastor");
+            idFazenda = res.getInt("idFazenda");
+            area = res.getDouble("area");
+            foto = res.getBytes("foto");
+            locais.add(new Local(nome, nisPastor, idFazenda, area, new Imagem(foto)));
+        }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProprietarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+        return locais;
+    }
+
+    @Override
+    public ArrayList<Pastor> buscarPastores(String emailProprietario) {
+        ArrayList<Pastor> locais = new ArrayList<>();
+        String nis, nome;
+        double salario;
+        try (PreparedStatement comando = conexao.prepareStatement(
+                """
+                SELECT * from pastor
+                WHERE email = ?;
+                """)) {
+        comando.setString(1, emailProprietario);
+        ResultSet res  = comando.executeQuery();
+        while (res.next()){
+            nome = res.getString("nome");
+            nis = res.getString("nis");
+            salario = res.getDouble("salario");
+            locais.add(new Pastor(nis, nome, salario));
+        }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProprietarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+        return locais;
+    }
+    
+    
     
 }

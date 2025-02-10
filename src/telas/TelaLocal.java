@@ -1,22 +1,32 @@
 
 package telas;
 
+import java.io.File;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import modelos.Fazenda;
+import modelos.Imagem;
+import modelos.Local;
+import modelos.Pastor;
 import permanencia.sqlite.ProprietarioDAO;
 import modelos.Proprietario;
 import permanencia.sqlite.FazendaDAO;
+import permanencia.sqlite.LocalDAO;
 
 
-public class TelaFazenda extends javax.swing.JFrame {
-    ArrayList<Fazenda> fazendas;
+public class TelaLocal extends javax.swing.JFrame {
+    ArrayList<Local> locais;
     boolean criar;
-    public TelaFazenda() {
+    Imagem imagemSelecionada;
+    
+    public TelaLocal() {
         initComponents();
         this.setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -33,14 +43,20 @@ public class TelaFazenda extends javax.swing.JFrame {
         btnBusca = new javax.swing.JButton();
         pnlData = new javax.swing.JPanel();
         pnlTable = new javax.swing.JScrollPane();
-        tblFazendas = new javax.swing.JTable();
+        tblLocais = new javax.swing.JTable();
         jspSeparador = new javax.swing.JSeparator();
         lblNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
-        lblArea = new javax.swing.JLabel();
-        txtEstado = new javax.swing.JTextField();
-        lblEstado = new javax.swing.JLabel();
         txtArea = new javax.swing.JTextField();
+        lblArea = new javax.swing.JLabel();
+        cmbFazenda = new javax.swing.JComboBox<>();
+        cmbPastor = new javax.swing.JComboBox<>();
+        lblFazenda = new javax.swing.JLabel();
+        lblPastor = new javax.swing.JLabel();
+        pnlBordaEnviar = new javax.swing.JPanel();
+        lblcaminhoImagem = new javax.swing.JLabel();
+        btnAbrir = new javax.swing.JButton();
+        lblFoto = new javax.swing.JLabel();
         btnCriar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
@@ -84,18 +100,18 @@ public class TelaFazenda extends javax.swing.JFrame {
         pnlTable.setBackground(new java.awt.Color(51, 51, 51));
         pnlTable.setOpaque(false);
 
-        tblFazendas.setBackground(new java.awt.Color(225, 225, 225));
-        tblFazendas.setFont(new java.awt.Font("Segoe UI Black", 0, 13)); // NOI18N
-        tblFazendas.setModel(new javax.swing.table.DefaultTableModel(
+        tblLocais.setBackground(new java.awt.Color(225, 225, 225));
+        tblLocais.setFont(new java.awt.Font("Segoe UI Black", 0, 13)); // NOI18N
+        tblLocais.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "NOME", "ESTADO", "AREA"
+                "NOME", "FAZENDA", "AREA", "PASTOR"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
@@ -109,19 +125,19 @@ public class TelaFazenda extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblFazendas.setToolTipText("");
-        tblFazendas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tblFazendas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tblFazendas.setShowGrid(true);
-        tblFazendas.getTableHeader().setReorderingAllowed(false);
-        pnlTable.setViewportView(tblFazendas);
+        tblLocais.setToolTipText("");
+        tblLocais.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblLocais.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblLocais.setShowGrid(true);
+        tblLocais.getTableHeader().setReorderingAllowed(false);
+        pnlTable.setViewportView(tblLocais);
 
         jspSeparador.setBackground(new java.awt.Color(51, 51, 51));
         jspSeparador.setForeground(new java.awt.Color(51, 51, 51));
 
         lblNome.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        lblNome.setForeground(new java.awt.Color(232, 232, 232));
-        lblNome.setText("Nome");
+        lblNome.setForeground(new java.awt.Color(255, 255, 255));
+        lblNome.setText("NOME:");
 
         txtNome.setBackground(new java.awt.Color(51, 51, 51));
         txtNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -130,21 +146,6 @@ public class TelaFazenda extends javax.swing.JFrame {
         txtNome.setCaretColor(new java.awt.Color(255, 255, 255));
         txtNome.setEnabled(false);
 
-        lblArea.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        lblArea.setForeground(new java.awt.Color(255, 255, 255));
-        lblArea.setText("Area:");
-
-        txtEstado.setBackground(new java.awt.Color(51, 51, 51));
-        txtEstado.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtEstado.setForeground(new java.awt.Color(255, 255, 255));
-        txtEstado.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        txtEstado.setCaretColor(new java.awt.Color(255, 255, 255));
-        txtEstado.setEnabled(false);
-
-        lblEstado.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        lblEstado.setForeground(new java.awt.Color(232, 232, 232));
-        lblEstado.setText("Estado:");
-
         txtArea.setBackground(new java.awt.Color(51, 51, 51));
         txtArea.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtArea.setForeground(new java.awt.Color(255, 255, 255));
@@ -152,28 +153,93 @@ public class TelaFazenda extends javax.swing.JFrame {
         txtArea.setCaretColor(new java.awt.Color(255, 255, 255));
         txtArea.setEnabled(false);
 
+        lblArea.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        lblArea.setForeground(new java.awt.Color(232, 232, 232));
+        lblArea.setText("AREA:");
+
+        cmbFazenda.setBackground(new java.awt.Color(51, 51, 51));
+        cmbFazenda.setForeground(new java.awt.Color(255, 255, 255));
+        cmbFazenda.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        cmbPastor.setBackground(new java.awt.Color(51, 51, 51));
+        cmbPastor.setForeground(new java.awt.Color(255, 255, 255));
+        cmbPastor.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        lblFazenda.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        lblFazenda.setForeground(new java.awt.Color(232, 232, 232));
+        lblFazenda.setText("FAZENDA:");
+
+        lblPastor.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        lblPastor.setForeground(new java.awt.Color(232, 232, 232));
+        lblPastor.setText("PASTOR:");
+
+        pnlBordaEnviar.setBackground(new java.awt.Color(0, 153, 102));
+        pnlBordaEnviar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        lblcaminhoImagem.setText("               ");
+
+        btnAbrir.setBackground(new java.awt.Color(51, 51, 51));
+        btnAbrir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnAbrir.setForeground(new java.awt.Color(255, 255, 255));
+        btnAbrir.setText("Abrir");
+        btnAbrir.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnAbrir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAbrirActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlBordaEnviarLayout = new javax.swing.GroupLayout(pnlBordaEnviar);
+        pnlBordaEnviar.setLayout(pnlBordaEnviarLayout);
+        pnlBordaEnviarLayout.setHorizontalGroup(
+            pnlBordaEnviarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBordaEnviarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblcaminhoImagem, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAbrir, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11))
+        );
+        pnlBordaEnviarLayout.setVerticalGroup(
+            pnlBordaEnviarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBordaEnviarLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlBordaEnviarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblcaminhoImagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAbrir))
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout pnlDataLayout = new javax.swing.GroupLayout(pnlData);
         pnlData.setLayout(pnlDataLayout);
         pnlDataLayout.setHorizontalGroup(
             pnlDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDataLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlTable, javax.swing.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE)
-                .addContainerGap())
             .addComponent(jspSeparador)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDataLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(pnlDataLayout.createSequentialGroup()
                 .addGroup(pnlDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lblArea)
-                        .addComponent(lblEstado, javax.swing.GroupLayout.Alignment.TRAILING))
-                    .addComponent(lblNome))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtArea, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(169, 169, 169))
+                    .addGroup(pnlDataLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(pnlTable, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE))
+                    .addGroup(pnlDataLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(pnlDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNome)
+                            .addComponent(lblArea)
+                            .addComponent(lblFazenda)
+                            .addComponent(lblPastor))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbFazenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnlDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                                .addComponent(txtArea))
+                            .addComponent(cmbPastor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pnlDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(pnlBordaEnviar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(38, 38, 38)))
+                .addContainerGap())
         );
         pnlDataLayout.setVerticalGroup(
             pnlDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,19 +248,30 @@ public class TelaFazenda extends javax.swing.JFrame {
                 .addComponent(pnlTable, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jspSeparador, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addGroup(pnlDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblArea)
-                    .addComponent(txtArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(pnlDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEstado)
-                    .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(pnlDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNome)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlDataLayout.createSequentialGroup()
+                        .addGroup(pnlDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblNome)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblArea)
+                            .addComponent(txtArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmbFazenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblFazenda))
+                        .addGap(36, 36, 36)
+                        .addGroup(pnlDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmbPastor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPastor))
+                        .addGap(60, 60, 60))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDataLayout.createSequentialGroup()
+                        .addComponent(lblFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(pnlBordaEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21))))
         );
 
         btnCriar.setBackground(new java.awt.Color(51, 51, 51));
@@ -265,7 +342,7 @@ public class TelaFazenda extends javax.swing.JFrame {
                         .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         pnlBackLayout.setVerticalGroup(
             pnlBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,7 +354,7 @@ public class TelaFazenda extends javax.swing.JFrame {
                     .addComponent(btnBusca))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(pnlBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
                     .addComponent(btnExcluir)
@@ -322,89 +399,125 @@ public class TelaFazenda extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscaActionPerformed
 
     private void btnCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarActionPerformed
-        txtArea.setEnabled(true);
-        txtEstado.setEnabled(true);
         txtNome.setEnabled(true);
+        txtArea.setEnabled(true);
+        
         
         criar = true;
-        txtArea.setText("");
-        txtEstado.setText("");
         txtNome.setText("");
+        txtArea.setText("");
+        
         
         btnSalvar.setEnabled(true);
-        tblFazendas.clearSelection();
+        tblLocais.clearSelection();
+        lblFoto.setIcon(null);
+        imagemSelecionada = null;
+        lblcaminhoImagem.setText("");
+        cmbFazenda.setSelectedIndex(0);
+        cmbPastor.setSelectedIndex(0);
         
     }//GEN-LAST:event_btnCriarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        FazendaDAO conexao = new FazendaDAO();
-        int index = tblFazendas.getSelectedRow();
+        LocalDAO conexao = new LocalDAO();
+        int index = tblLocais.getSelectedRow();
         if (index == -1){
-            JOptionPane.showMessageDialog(null, "Selecione uma fazenda", "Aviso", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Selecione um local", "Aviso", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        int idFazenda = (int) tblFazendas.getValueAt(index, 0);
-        conexao.apagar(idFazenda);
+        
+        String nome = (String) tblLocais.getValueAt(index, 0);
+        int idFazenda = (int) tblLocais.getValueAt(index, 1);
+        
+        
+        conexao.apagar(nome, idFazenda);
         atualizaModelo();
         btnSalvar.setEnabled(false);
-        txtArea.setText("");
-        txtEstado.setText("");
         txtNome.setText("");
+        txtArea.setText("");
+        lblFoto.setIcon(null);
+        imagemSelecionada = null;
+        lblcaminhoImagem.setText("");
+        cmbFazenda.setSelectedIndex(0);
+        cmbPastor.setSelectedIndex(0);
         
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void pnlBlackComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_pnlBlackComponentShown
         pnlTable.setVisible(false);
-        tblFazendas.setVisible(false);
+        tblLocais.setVisible(false);
     }//GEN-LAST:event_pnlBlackComponentShown
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         atualizaModelo();
+        buscaFazendas(Proprietario.getProprietarioSessao().getEmail());
+        buscaPastores(Proprietario.getProprietarioSessao().getEmail());
     }//GEN-LAST:event_formComponentShown
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        int index = tblFazendas.getSelectedRow();
+        int index = tblLocais.getSelectedRow();
         if (index == -1){
-            JOptionPane.showMessageDialog(null, "Selecione uma fazenda", "Aviso", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Selecione um local", "Aviso", JOptionPane.WARNING_MESSAGE);
             return;
         }
         criar = false;
-        int idFazenda = (int) tblFazendas.getValueAt(index, 0);
-        Fazenda fazendaSelecionada = buscarFazenda(idFazenda);
         
-        txtArea.setText(Double.toString(fazendaSelecionada.getAreaTotal()));
-        txtEstado.setText(fazendaSelecionada.getEstado());
-        txtNome.setText(fazendaSelecionada.getNome());
+        String nome = (String) tblLocais.getValueAt(index, 0);
+        int idFazenda = (int) tblLocais.getValueAt(index, 1);
+        Local localSelecionado = buscarLocal(nome, idFazenda);
+        
+        imagemSelecionada = localSelecionado.getFoto();
+        lblFoto.setIcon(imagemSelecionada.fit(lblFoto));
+        txtNome.setText(localSelecionado.getNome());
+        txtArea.setText(Double.toString(localSelecionado.getArea()));
+        String item;
+        for (int i = 1; i < cmbFazenda.getItemCount(); i++) {
+             if(Integer.parseInt(cmbFazenda.getItemAt(i)) == localSelecionado.getIdFazenda()){
+                 cmbFazenda.setSelectedIndex(i);
+             }
+        }
+        for (int i = 1; i < cmbPastor.getItemCount(); i++) {
+             if(cmbPastor.getItemAt(i).equals(localSelecionado.getNisPastor())){
+                 cmbPastor.setSelectedIndex(i);
+             }
+        }
         
         btnSalvar.setEnabled(true);
-        txtArea.setEnabled(true);
-        txtEstado.setEnabled(true);
         txtNome.setEnabled(true);
+        txtArea.setEnabled(true);
+        lblcaminhoImagem.setText("");
         
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         try {
             Double area = Double.valueOf(txtArea.getText());
-            int idFazenda;
-            String estado = txtEstado.getText();
+            int indexFazenda = cmbFazenda.getSelectedIndex();
+            int indexPastor = cmbPastor.getSelectedIndex();
             String nome = txtNome.getText();
             
-            int index = (int) tblFazendas.getSelectedRow();
+            int index = (int) tblLocais.getSelectedRow();
 
-            if (estado.isBlank() || nome.isBlank() || !criar && index == -1){
+            if (nome.isBlank() || (criar && imagemSelecionada == null) || (!criar && index == -1) || indexFazenda <= 0 || indexPastor <= 0){
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos", "Aviso", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            idFazenda = criar ? 0 : (int) tblFazendas.getValueAt(index, 0);
-            
-            FazendaDAO conexao = new FazendaDAO();
-            Fazenda fazenda = new Fazenda(area, estado, nome, Proprietario.getProprietarioSessao().getEmail());
-            boolean resposta = criar ? conexao.criar(fazenda) : conexao.atualizar(fazenda, idFazenda);
-            
+            int idFazenda = Integer.parseInt((String) cmbFazenda.getSelectedItem());
+            String nis = (String) cmbPastor.getSelectedItem();
+            LocalDAO conexao = new LocalDAO();
+            Local local = new Local(nome, nis, idFazenda, area, imagemSelecionada);
+            boolean resposta = criar ? conexao.criar(local) : conexao.atualizar(local, nome, idFazenda);
+           
             if(resposta){
                 JOptionPane.showMessageDialog(null, "Conta " +  (criar ? "criada" : "atualizada") + " com sucesso", "sucesso", JOptionPane.INFORMATION_MESSAGE);
                 atualizaModelo();
+                txtArea.setText("");
+                txtNome.setText("");
+                cmbFazenda.setSelectedIndex(0);
+                cmbPastor.setSelectedIndex(0);
+                lblcaminhoImagem.setText("");
+                imagemSelecionada = null;
+                lblFoto.setIcon(null);
             }
             else{
                 JOptionPane.showMessageDialog(null, "Erro na " +  (criar ? "criação" : "atualização") + " da conta", "Erro!", JOptionPane.ERROR_MESSAGE);
@@ -415,49 +528,99 @@ public class TelaFazenda extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Verifique todos os campos", "Aviso", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirActionPerformed
+
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filtroImagens = new FileNameExtensionFilter("Imagens", "jpg", "png");
+        fileChooser.setFileFilter(filtroImagens);
+        int resposta = fileChooser.showOpenDialog(null);
+        if (resposta == JFileChooser.APPROVE_OPTION) {
+            File arquivoImagem = new File(fileChooser.getSelectedFile().getAbsolutePath());
+            boolean tipoValido = Imagem.imagemValida(arquivoImagem.getName());
+            if (tipoValido){
+                lblcaminhoImagem.setText(arquivoImagem.getName());
+                imagemSelecionada = new Imagem(arquivoImagem);
+                lblFoto.setIcon(imagemSelecionada.fit(lblFoto));
+                
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Arquivo Inválido",
+                    "ERRO", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnAbrirActionPerformed
     
-    private Fazenda buscarFazenda(int idFazenda){
-        for (Fazenda fazenda : fazendas){
-            if (fazenda.getIdFazenda() == idFazenda){
-                return fazenda;
+    private Local buscarLocal(String nome, int idFazenda){
+        for (Local local : locais){
+            if (local.getNome().equals(nome) && idFazenda == local.getIdFazenda()){
+                return local;
             }
         }
         return null;
     }
     
     private void atualizaModelo(){
-        DefaultTableModel modelo = (DefaultTableModel) tblFazendas.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) tblLocais.getModel();
         modelo.setRowCount(0);
         ProprietarioDAO conexao = new ProprietarioDAO();
-        fazendas = conexao.buscarFazendas(Proprietario.getProprietarioSessao().getEmail());
-        for (Fazenda fazenda : fazendas){
-            modelo.addRow( new Object[]{fazenda.getIdFazenda(), fazenda.getNome(), fazenda.getEstado(), fazenda.getAreaTotal()});
+        locais = conexao.buscarLocais(Proprietario.getProprietarioSessao().getEmail());
+        for (Local local : locais){
+            modelo.addRow( new Object[]{local.getNome(), local.getIdFazenda(), local.getArea(), local.getNisPastor()});
         }
         
-        tblFazendas.setModel(modelo);
+        tblLocais.setModel(modelo);
     }
+    
+    private void buscaFazendas(String email){
+         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+         model.addElement("Selecione uma fazenda");
+         ProprietarioDAO conexao = new ProprietarioDAO();
+         ArrayList<Fazenda> fazendas = conexao.buscarFazendas(email);
+         for (Fazenda fazenda : fazendas){
+             model.addElement(String.format("%d", fazenda.getIdFazenda()));
+         }
+         cmbFazenda.setModel(model);
+    }
+    private void buscaPastores(String email){
+         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+         model.addElement("Selecione um pastor");
+         ProprietarioDAO conexao = new ProprietarioDAO();
+         ArrayList<Pastor> pastores = conexao.buscarPastores(email);
+         for (Pastor pastor : pastores){
+             model.addElement(pastor.getNis());
+         }
+         cmbPastor.setModel(model);
+    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAbrir;
     private javax.swing.JButton btnBusca;
     private javax.swing.JButton btnCriar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JComboBox<String> cmbFazenda;
+    private javax.swing.JComboBox<String> cmbPastor;
     private javax.swing.JSeparator jspSeparador;
     private javax.swing.JLabel lblArea;
     private javax.swing.JLabel lblBusca;
-    private javax.swing.JLabel lblEstado;
+    private javax.swing.JLabel lblFazenda;
+    private javax.swing.JLabel lblFoto;
     private javax.swing.JLabel lblNome;
+    private javax.swing.JLabel lblPastor;
+    private javax.swing.JLabel lblcaminhoImagem;
     private javax.swing.JPanel pnlBack;
     private javax.swing.JPanel pnlBlack;
+    private javax.swing.JPanel pnlBordaEnviar;
     private javax.swing.JPanel pnlData;
     private javax.swing.JScrollPane pnlTable;
-    private javax.swing.JTable tblFazendas;
+    private javax.swing.JTable tblLocais;
     private javax.swing.JTextField txtArea;
     private javax.swing.JTextField txtBusca;
-    private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
 }

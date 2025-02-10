@@ -1,13 +1,13 @@
 CREATE TABLE IF NOT EXISTS localidade(
-    PRIMARY KEY (nome, idFazenda),
     nome TEXT NOT NULL,
     idFazenda INTEGER NOT NULL,
     area REAL NOT NULL,
     foto BLOB NOT NULL,
-    idPastor INTEGER NOT NULL,
+    nisPastor TEXT NOT NULL,
+    PRIMARY KEY (nome, idFazenda),
     FOREIGN KEY (idFazenda) REFERENCES fazenda(idFazenda)
         ON DELETE CASCADE,
-    FOREIGN KEY (idPastor) REFERENCES pastor(idPastor)
+    FOREIGN KEY (nisPastor) REFERENCES pastor(nis)
         ON DELETE CASCADE
 );
 
