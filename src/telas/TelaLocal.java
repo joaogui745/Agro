@@ -441,6 +441,9 @@ public class TelaLocal extends javax.swing.JFrame {
         cmbFazenda.setSelectedIndex(0);
         cmbPastor.setSelectedIndex(0);
         
+        JOptionPane.showMessageDialog(null, "Local excluido com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+        
+        
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void pnlBlackComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_pnlBlackComponentShown
@@ -491,6 +494,7 @@ public class TelaLocal extends javax.swing.JFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         try {
+            boolean resposta;
             Double area = Double.valueOf(txtArea.getText());
             int indexFazenda = cmbFazenda.getSelectedIndex();
             int indexPastor = cmbPastor.getSelectedIndex();
@@ -502,14 +506,23 @@ public class TelaLocal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos", "Aviso", JOptionPane.WARNING_MESSAGE);
                 return;
             }
+            
             int idFazenda = Integer.parseInt((String) cmbFazenda.getSelectedItem());
             String nis = (String) cmbPastor.getSelectedItem();
             LocalDAO conexao = new LocalDAO();
             Local local = new Local(nome, nis, idFazenda, area, imagemSelecionada);
-            boolean resposta = criar ? conexao.criar(local) : conexao.atualizar(local, nome, idFazenda);
+            
+            if (criar){
+                resposta = conexao.criar(local); 
+            }
+            else{
+                String nomeAntigo = (String) tblLocais.getValueAt(index, 0);
+                int idFazendaAntigo = (int) tblLocais.getValueAt(index, 1);
+                resposta = conexao.atualizar(local, nomeAntigo, idFazendaAntigo);
+            }
            
             if(resposta){
-                JOptionPane.showMessageDialog(null, "Conta " +  (criar ? "criada" : "atualizada") + " com sucesso", "sucesso", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Local " +  (criar ? "criado" : "atualizado") + " com sucesso", "sucesso", JOptionPane.INFORMATION_MESSAGE);
                 atualizaModelo();
                 txtArea.setText("");
                 txtNome.setText("");
@@ -520,7 +533,7 @@ public class TelaLocal extends javax.swing.JFrame {
                 lblFoto.setIcon(null);
             }
             else{
-                JOptionPane.showMessageDialog(null, "Erro na " +  (criar ? "criação" : "atualização") + " da conta", "Erro!", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Erro na " +  (criar ? "criação" : "atualização") + " do local", "Erro!", JOptionPane.ERROR_MESSAGE);
             }
 
         }
