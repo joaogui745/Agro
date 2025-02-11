@@ -23,7 +23,7 @@ public class FazendaDAOTest {
         boolean resposta = conexao.criar(fazenda);
         assertTrue(resposta);
         Fazenda mesmaFazenda = conexao.buscarPorId(fazenda.getIdFazenda());
-        assertEquals(fazenda.toString(), mesmaFazenda.toString());
+        assertEquals(fazenda.tooString(), mesmaFazenda.tooString());
         Fazenda outraFazenda = conexao.buscarPorId(7777);   // Id Inexistente
         assertNull(outraFazenda);
     }
@@ -53,7 +53,7 @@ public class FazendaDAOTest {
         resposta = conexao.atualizar(fazenda, fazenda.getIdFazenda());
         assertTrue(resposta);
         Fazenda fazendaAtualizada = conexao.buscarPorId(fazenda.getIdFazenda());
-        assertEquals( fazenda.toString(), fazendaAtualizada.toString());
+        assertEquals( fazenda.tooString(), fazendaAtualizada.tooString());
         
         // Mudando objeto inexistente
         resposta = conexao.atualizar(fazenda, 7777);

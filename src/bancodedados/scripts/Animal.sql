@@ -3,8 +3,10 @@ CREATE TABLE IF NOT EXISTS animal(
     idade INTEGER NOT NULL, 
     imagem BLOB NOT NULL, 
     sexo TEXT NOT NULL,
-    idGrupo INTEGER NOT NULL
-        FOREIGN KEY idGrupo REFERENCES grupo(idGrupo) ON DELETE CASCADE,
-    idCaderneta INTEGER NOT NULL 
-        FOREIGN KEY idCaderneta REFERENCES caderneta(idCaderneta) ON DELETE CASCADE 
+    idGrupo INTEGER NOT NULL,
+    idCaderneta INTEGER NOT NULL,
+    FOREIGN KEY (idGrupo) REFERENCES grupo(idGrupo) 
+        ON DELETE CASCADE,
+    FOREIGN KEY (idCaderneta) REFERENCES caderneta(idCaderneta) 
+        ON DELETE CASCADE 
 ); 

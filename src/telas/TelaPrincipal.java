@@ -24,6 +24,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnFazenda = new javax.swing.JButton();
         lblUsuario = new javax.swing.JLabel();
         btlConta = new javax.swing.JButton();
+        tblPastores = new javax.swing.JButton();
         pnlPrincipal = new javax.swing.JPanel();
         lblEmail = new javax.swing.JLabel();
         lblSenha = new javax.swing.JLabel();
@@ -82,10 +83,25 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        tblPastores.setBackground(new java.awt.Color(51, 51, 51));
+        tblPastores.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        tblPastores.setForeground(new java.awt.Color(255, 255, 255));
+        tblPastores.setText("Pastores");
+        tblPastores.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        tblPastores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tblPastoresActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlMenuLayout = new javax.swing.GroupLayout(pnlMenu);
         pnlMenu.setLayout(pnlMenuLayout);
         pnlMenuLayout.setHorizontalGroup(
             pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlMenuLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(pnlMenuLayout.createSequentialGroup()
                 .addGap(181, 181, 181)
                 .addGroup(pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,26 +110,25 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addGap(94, 198, Short.MAX_VALUE))
                     .addGroup(pnlMenuLayout.createSequentialGroup()
                         .addGroup(pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btlConta, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tblPastores, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btlConta, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(pnlMenuLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         pnlMenuLayout.setVerticalGroup(
             pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlMenuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addGap(14, 14, 14)
                 .addComponent(btnFazenda, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGap(28, 28, 28)
                 .addComponent(btnLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(btlConta, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(tblPastores, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
         );
 
         camadas.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -301,6 +316,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         telaLocal.setVisible(true);
     }//GEN-LAST:event_btnLocalActionPerformed
 
+    private void tblPastoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tblPastoresActionPerformed
+        TelaPastor telaPastor = new TelaPastor();
+        telaPastor.setVisible(true);
+    }//GEN-LAST:event_tblPastoresActionPerformed
+
     public void mostraLogin(){
         pnlPrincipal.setVisible(true);
         pnlMenu.setVisible(false);
@@ -323,6 +343,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel pnlBack;
     private javax.swing.JPanel pnlMenu;
     private javax.swing.JPanel pnlPrincipal;
+    private javax.swing.JButton tblPastores;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables

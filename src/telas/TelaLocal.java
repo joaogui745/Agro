@@ -328,11 +328,11 @@ public class TelaLocal extends javax.swing.JFrame {
                 .addGroup(pnlBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pnlBackLayout.createSequentialGroup()
                         .addComponent(btnCriar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(96, 96, 96)
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(133, 133, 133)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(63, 63, 63)
+                        .addGap(70, 70, 70)
                         .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(pnlData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlBackLayout.createSequentialGroup()
@@ -354,13 +354,13 @@ public class TelaLocal extends javax.swing.JFrame {
                     .addComponent(btnBusca))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(pnlBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSalvar)
-                    .addComponent(btnExcluir)
-                    .addComponent(btnEditar)
-                    .addComponent(btnCriar))
-                .addGap(64, 64, 64))
+                    .addComponent(btnCriar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34))
         );
 
         javax.swing.GroupLayout pnlBlackLayout = new javax.swing.GroupLayout(pnlBlack);
@@ -475,12 +475,13 @@ public class TelaLocal extends javax.swing.JFrame {
         txtArea.setText(Double.toString(localSelecionado.getArea()));
         String item;
         for (int i = 1; i < cmbFazenda.getItemCount(); i++) {
-             if(Integer.parseInt(cmbFazenda.getItemAt(i)) == localSelecionado.getIdFazenda()){
+             
+            if(((Fazenda) cmbFazenda.getItemAt(i)).getIdFazenda() == localSelecionado.getIdFazenda()){
                  cmbFazenda.setSelectedIndex(i);
              }
         }
         for (int i = 1; i < cmbPastor.getItemCount(); i++) {
-             if(cmbPastor.getItemAt(i).equals(localSelecionado.getNisPastor())){
+             if(((Pastor) cmbPastor.getItemAt(i)).getNis().equals(localSelecionado.getNisPastor())){
                  cmbPastor.setSelectedIndex(i);
              }
         }
@@ -507,8 +508,8 @@ public class TelaLocal extends javax.swing.JFrame {
                 return;
             }
             
-            int idFazenda = Integer.parseInt((String) cmbFazenda.getSelectedItem());
-            String nis = (String) cmbPastor.getSelectedItem();
+            int idFazenda = ((Fazenda) cmbFazenda.getSelectedItem()).getIdFazenda();
+            String nis = ((Pastor) cmbPastor.getSelectedItem()).getNis();
             LocalDAO conexao = new LocalDAO();
             Local local = new Local(nome, nis, idFazenda, area, imagemSelecionada);
             
@@ -587,22 +588,22 @@ public class TelaLocal extends javax.swing.JFrame {
     }
     
     private void buscaFazendas(String email){
-         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
-         model.addElement("Selecione uma fazenda");
+         DefaultComboBoxModel<Object> model = new DefaultComboBoxModel<>();
+         model.addElement("Selecione a fazenda");
          ProprietarioDAO conexao = new ProprietarioDAO();
          ArrayList<Fazenda> fazendas = conexao.buscarFazendas(email);
          for (Fazenda fazenda : fazendas){
-             model.addElement(String.format("%d", fazenda.getIdFazenda()));
+             model.addElement(fazenda);
          }
          cmbFazenda.setModel(model);
     }
     private void buscaPastores(String email){
-         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+         DefaultComboBoxModel<Object> model = new DefaultComboBoxModel<>();
          model.addElement("Selecione um pastor");
          ProprietarioDAO conexao = new ProprietarioDAO();
          ArrayList<Pastor> pastores = conexao.buscarPastores(email);
          for (Pastor pastor : pastores){
-             model.addElement(pastor.getNis());
+             model.addElement(pastor);
          }
          cmbPastor.setModel(model);
     }
@@ -616,8 +617,8 @@ public class TelaLocal extends javax.swing.JFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JComboBox<String> cmbFazenda;
-    private javax.swing.JComboBox<String> cmbPastor;
+    private javax.swing.JComboBox<Object> cmbFazenda;
+    private javax.swing.JComboBox<Object> cmbPastor;
     private javax.swing.JSeparator jspSeparador;
     private javax.swing.JLabel lblArea;
     private javax.swing.JLabel lblBusca;

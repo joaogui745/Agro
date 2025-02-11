@@ -405,6 +405,9 @@ public class TelaFazenda extends javax.swing.JFrame {
             if(resposta){
                 JOptionPane.showMessageDialog(null, "Conta " +  (criar ? "criada" : "atualizada") + " com sucesso", "sucesso", JOptionPane.INFORMATION_MESSAGE);
                 atualizaModelo();
+                txtArea.setText("");
+                txtEstado.setText("");
+                txtNome.setText("");
             }
             else{
                 JOptionPane.showMessageDialog(null, "Erro na " +  (criar ? "criação" : "atualização") + " da conta", "Erro!", JOptionPane.ERROR_MESSAGE);

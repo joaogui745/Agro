@@ -163,7 +163,7 @@ public class ProprietarioDAO implements ProprietarioDAOI{
     @Override
     public ArrayList<Pastor> buscarPastores(String emailProprietario) {
         ArrayList<Pastor> locais = new ArrayList<>();
-        String nis, nome;
+        String nis, nome, email;
         double salario;
         try (PreparedStatement comando = conexao.prepareStatement(
                 """
@@ -175,8 +175,9 @@ public class ProprietarioDAO implements ProprietarioDAOI{
         while (res.next()){
             nome = res.getString("nome");
             nis = res.getString("nis");
+            email = res.getString("email");
             salario = res.getDouble("salario");
-            locais.add(new Pastor(nis, nome, salario));
+            locais.add(new Pastor(nis, nome, email ,salario));
         }
         } catch (SQLException ex) {
             Logger.getLogger(ProprietarioDAO.class.getName()).log(Level.SEVERE, null, ex);

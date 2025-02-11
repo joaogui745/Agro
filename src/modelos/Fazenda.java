@@ -62,9 +62,13 @@ public class Fazenda {
         return idFazenda;
     }
 
-    @Override
-    public String toString() {
+    public String tooString() {
         return "Fazenda{" + "idFazenda=" + idFazenda + ", areaTotal=" + areaTotal + ", estado=" + estado + ", nome=" + nome + ", email=" + email + '}';
+    }
+    
+    @Override
+    public String toString(){
+        return String.format("%d - %s", idFazenda, nome);
     }
     
     

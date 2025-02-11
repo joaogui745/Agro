@@ -5,6 +5,8 @@ import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.DriverManager;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class BancoDeDados {
     private static BancoDeDados instancia = null;
@@ -18,16 +20,26 @@ public class BancoDeDados {
                 comando.addBatch(LeitorDeArquivos.carregaArquivo("bancodedados/scripts/Fazenda.sql"));
                 comando.addBatch(LeitorDeArquivos.carregaArquivo("bancodedados/scripts/Pastor.sql"));
                 comando.addBatch(LeitorDeArquivos.carregaArquivo("bancodedados/scripts/Local.sql"));
+                comando.addBatch(LeitorDeArquivos.carregaArquivo("bancodedados/scripts/Veterinario.sql"));
+                comando.addBatch(LeitorDeArquivos.carregaArquivo("bancodedados/scripts/Grupo.sql"));
+                comando.addBatch(LeitorDeArquivos.carregaArquivo("bancodedados/scripts/RelVeterinarioGrupo.sql"));
+                comando.addBatch(LeitorDeArquivos.carregaArquivo("bancodedados/scripts/Racao.sql"));
+                comando.addBatch(LeitorDeArquivos.carregaArquivo("bancodedados/scripts/Racao.sql"));
+                comando.addBatch(LeitorDeArquivos.carregaArquivo("bancodedados/scripts/Animal.sql"));
+                comando.addBatch(LeitorDeArquivos.carregaArquivo("bancodedados/scripts/Caderneta.sql"));
+                comando.addBatch(LeitorDeArquivos.carregaArquivo("bancodedados/scripts/Vacina.sql"));
+                comando.addBatch(LeitorDeArquivos.carregaArquivo("bancodedados/scripts/RelCadernetaVacina.sql"));
+                
                 // Inserção de uma view
                 comando.addBatch(LeitorDeArquivos.carregaArquivo("bancodedados/scripts/LocalidadesPorProprietario.sql"));
                 // Inserção de Dados
-                comando.addBatch(LeitorDeArquivos.carregaArquivo("bancodedados/dados/DadosProprietario.sql"));
-                comando.addBatch(LeitorDeArquivos.carregaArquivo("bancodedados/dados/DadosFazenda.sql"));
-                comando.addBatch(LeitorDeArquivos.carregaArquivo("bancodedados/dados/DadosPastor.sql"));
+                comando.addBatch(LeitorDeArquivos.carregaArquivo("bancodedados/dados/Proprietario.sql"));
+                comando.addBatch(LeitorDeArquivos.carregaArquivo("bancodedados/dados/Fazenda.sql"));
+                comando.addBatch(LeitorDeArquivos.carregaArquivo("bancodedados/dados/Pastor.sql"));
                 comando.executeBatch();
             }
-        } catch (SQLException | IOException ex ) {
-            System.out.println(ex);
+        } catch (SQLException | IOException ex) {
+            Logger.getLogger(BancoDeDados.class.getName()).log(Level.SEVERE, null, ex);
         }
        
     }
